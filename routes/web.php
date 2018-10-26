@@ -12,11 +12,12 @@
 */
 
 //Группа роутов для админки
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth'] ], function () {
+Route::group(['prefix' => 'a7dm0in3', 'namespace' => 'Admin', 'middleware' => ['auth'] ], function () {
     Route::get('/', 'DashboardController@dashboard')->name('admin.index');
-    //['as'=>'admin'] - префикс для именнованного маршрута (для исключения пересечения с др ресурсами)
+    //['as'=>'admin'] - префикс для полного имени в именнованном маршруте (напр - admin.category.create)
+    //для исключения пересечения с др именнованными ресурсами
     Route::resource('/category', 'CategoryController', ['as'=>'admin']);
-    Route::resource('/article', 'ArticleController', ['as'=>'admin']);
+    //Route::resource('/article', 'ArticleController', ['as'=>'admin']);
 });
 
 Route::get('/', function () {

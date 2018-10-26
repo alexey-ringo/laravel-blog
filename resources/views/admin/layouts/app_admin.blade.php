@@ -20,7 +20,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('adminka/css/themify-icons.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('adminka/css/flag-icon.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('adminka/css/cs-skin-elastic.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('adminka/css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('adminka/css/lib/datatable/dataTables.bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('adminka/scss/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('adminka/css/lib/vector-map/jqvmap.min.css') }}">
     
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
@@ -48,8 +49,8 @@
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Категории</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-puzzle-piece"></i><a href="{{route('admin.category.index')}}">Категории</a></li>
-                            <li><i class="fa fa-id-badge"></i><a href="ui-badges.html">Badges</a></li>
+                            <li><i class="fa fa-puzzle-piece"></i><a href="{{route('admin.category.index')}}">Все категории</a></li>
+                            <li><i class="fa fa-id-badge"></i><a href="{{route('admin.category.create')}}">Новая категория</a></li>
                             <li><i class="fa fa-bars"></i><a href="ui-tabs.html">Tabs</a></li>
                             <li><i class="fa fa-share-square-o"></i><a href="ui-social-buttons.html">Social Buttons</a></li>
                             <li><i class="fa fa-id-card-o"></i><a href="ui-cards.html">Cards</a></li>
@@ -251,28 +252,9 @@
         </header><!-- /header -->
         <!-- Header-->
 
-        <div class="breadcrumbs">
-            <div class="col-sm-4">
-                <div class="page-header float-left">
-                    <div class="page-title">
-                        <h1>Dashboard</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <div class="page-header float-right">
-                    <div class="page-title">
-                        <ol class="breadcrumb text-right">
-                            <li class="active">Dashboard</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="content mt-3">
-            @yield('content')
-        </div>
+        
+        @yield('content')
+        
         
     </div><!-- /#right-panel -->
 
@@ -281,17 +263,43 @@
     
     <!-- Scripts -->
     <script src="{{ asset('adminka/js/vendor/jquery-2.1.4.min.js') }}" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script src="{{ asset('adminka/js/popper.min.js') }}" defer></script>
     <script src="{{ asset('adminka/js/plugins.js') }}" defer></script>
     <script src="{{ asset('adminka/js/main.js') }}" defer></script>
     
+    
+    <script src="{{ asset('adminka/js/lib/data-table/datatables.min.js') }}" defer></script>
+    <script src="{{ asset('adminka/js/lib/data-table/dataTables.bootstrap.min.js') }}" defer></script>
+    <script src="{{ asset('adminka/js/lib/data-table/dataTables.buttons.min.js') }}" defer></script>
+    <script src="{{ asset('adminka/js/lib/data-table/buttons.bootstrap.min.js') }}" defer></script>
+    
+    <script src="{{ asset('adminka/js/custom-datatable.js') }}" defer></script>
+    
+    
+    <!--
     <script src="{{ asset('adminka/js/lib/chart-js/Chart.bundle.js') }}" defer></script>
     <script src="{{ asset('adminka/js/dashboard.js') }}" defer></script>
     <script src="{{ asset('adminka/js/widgets.js') }}" defer></script>
+    
+    <script src="{{ asset('adminka/js/lib/data-table/datatables.min.js') }}" defer></script>
+    <script src="{{ asset('adminka/js/lib/data-table/dataTables.bootstrap.min.js') }}" defer></script>
+    <script src="{{ asset('adminka/js/lib/data-table/dataTables.buttons.min.js') }}" defer></script>
+    <script src="{{ asset('adminka/js/lib/data-table/buttons.bootstrap.min.js') }}" defer></script>
+    <script src="{{ asset('adminka/js/lib/data-table/jszip.min.js') }}" defer></script>
+    <script src="{{ asset('adminka/js/lib/data-table/pdfmake.min.js') }}" defer></script>
+    <script src="{{ asset('adminka/js/lib/data-table/vfs_fonts.js') }}" defer></script>
+    <script src="{{ asset('adminka/js/lib/data-table/buttons.html5.min.js') }}" defer></script>
+    <script src="{{ asset('adminka/js/lib/data-table/buttons.print.min.js') }}" defer></script>
+    <script src="{{ asset('adminka/js/lib/data-table/buttons.colVis.min.js') }}" defer></script>
+    <script src="{{ asset('adminka/js/lib/data-table/datatables-init.js') }}" defer></script>
+    <!--
     <script src="{{ asset('adminka/js/lib/vector-map/jquery.vmap.js') }}" defer></script>
     <script src="{{ asset('adminka/js/lib/vector-map/jquery.vmap.min.js') }}" defer></script>
     <script src="{{ asset('adminka/js/lib/vector-map/jquery.vmap.sampledata.js') }}" defer></script>
     <script src="{{ asset('adminka/js/lib/vector-map/country/jquery.vmap.world.js') }}" defer></script>
     <script src="{{ asset('adminka/js/custom-page.js') }}" defer></script>
+    
+    <script src="{{ asset('adminka/js/custom-datatable.js') }}" defer></script>
+    -->
 </body>
 </html>
