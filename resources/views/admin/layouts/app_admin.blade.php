@@ -51,8 +51,8 @@
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-puzzle-piece"></i><a href="{{route('admin.category.index')}}">Все категории</a></li>
                             <li><i class="fa fa-id-badge"></i><a href="{{route('admin.category.create')}}">Новая категория</a></li>
-                            <li><i class="fa fa-bars"></i><a href="ui-tabs.html">Tabs</a></li>
-                            <li><i class="fa fa-share-square-o"></i><a href="ui-social-buttons.html">Social Buttons</a></li>
+                            <li><i class="fa fa-bars"></i><a href="{{route('admin.article.index')}}">Все статьи</a></li>
+                            <li><i class="fa fa-share-square-o"></i><a href="{{route('admin.article.create')}}">Новая статья</a></li>
                             <li><i class="fa fa-id-card-o"></i><a href="ui-cards.html">Cards</a></li>
                             <li><i class="fa fa-exclamation-triangle"></i><a href="ui-alerts.html">Alerts</a></li>
                             <li><i class="fa fa-spinner"></i><a href="ui-progressbar.html">Progress Bars</a></li>
@@ -65,8 +65,8 @@
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Материалы</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-table"></i><a href="tables-basic.html">Basic Table</a></li>
-                            <li><i class="fa fa-table"></i><a href="tables-data.html">Data Table</a></li>
+                            <li><i class="fa fa-table"></i><a href="{{route('admin.article.index')}}">Все статьи</a></li>
+                            <li><i class="fa fa-table"></i><a href="{{route('admin.article.create')}}">Новая статья</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
@@ -262,7 +262,12 @@
     
     
     <!-- Scripts -->
-    <script src="{{ asset('adminka/js/vendor/jquery-2.1.4.min.js') }}" defer></script>
+    <script src="{{ asset('/vendor/unisharp/laravel-ckeditor/ckeditor.js') }}" defer></script>
+    
+    <script src="{{ asset('js/app.js') }}" defer></script>
+   
+    
+    <!--<script src="{{ asset('adminka/js/vendor/jquery-2.1.4.min.js') }}" defer></script>
     <script src="{{ asset('adminka/js/popper.min.js') }}" defer></script>
     <script src="{{ asset('adminka/js/plugins.js') }}" defer></script>
     <script src="{{ asset('adminka/js/main.js') }}" defer></script>

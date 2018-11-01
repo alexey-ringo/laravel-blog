@@ -17,7 +17,7 @@ Route::group(['prefix' => 'a7dm0in3', 'namespace' => 'Admin', 'middleware' => ['
     //['as'=>'admin'] - префикс для полного имени в именнованном маршруте (напр - admin.category.create)
     //для исключения пересечения с др именнованными ресурсами
     Route::resource('/category', 'CategoryController', ['as'=>'admin']);
-    //Route::resource('/article', 'ArticleController', ['as'=>'admin']);
+    Route::resource('/article', 'ArticleController', ['as'=>'admin']);
 });
 
 Route::get('/', function () {
