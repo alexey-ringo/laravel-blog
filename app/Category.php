@@ -20,7 +20,7 @@ class Category extends Model
     
     //Поиск вложенных категорий (по полю parent_id)
     //Связь "один к многим" на свою же модель
-    public function findChildrenCat() {
+    public function childrenCat() {
         return $this->hasMany(self::class, 'parent_id');
     }
 }

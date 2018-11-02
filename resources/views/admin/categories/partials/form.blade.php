@@ -7,7 +7,7 @@
         <div class="row form-group">
             <div class="col col-md-3"><label for="select" class=" form-control-label">Статус</label></div>
                 <div class="col-12 col-md-9">
-                    <select name="select" id="select" data-placeholder="Выберите статус категории..." class="standardSelect" tabindex="1">
+                    <select name="published" id="published" data-placeholder="Выберите статус категории..." class="standardSelect" tabindex="1">
                         {{--Форма универсальная для create и edit --}}
                         {{--Если существует переданный id категории - значит это edit --}}
                     @if(isset($category->id))

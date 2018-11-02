@@ -33,9 +33,9 @@ class CategoryController extends Controller
         'category' => [],
             
         //categories - дерево коллекций
-        //with('findChildrenCat') - коллекции с вложенными категориями - жадная загрузка
+        //with('childrenCat') - коллекции с вложенными категориями - жадная загрузка
         //where('parent_id', 0) - получаем категории, которые являются только родителями и никому не подчиняются
-        'categories' => Category::with('findChildrenCat')->where('parent_id', 0)->get(),
+        'categories' => Category::with('childrenCat')->where('parent_id', 0)->get(),
             
         //Некий символ, определяющий вложенность. Для наглядности визуализации
         'delimiter' => ''
@@ -82,9 +82,9 @@ class CategoryController extends Controller
         'category' => $category,
             
             //categories - дерево коллекций, переданное из index.blade.php
-            //with('findChildrenCat') - коллекции с вложенными категориями - жадная загрузка
+            //with('childrenCat') - коллекции с вложенными категориями - жадная загрузка
             //where('parent_id', 0) - получаем категории, которые являются только родителями и никому не подчиняются
-            'categories' => Category::with('findChildrenCat')->where('parent_id', 0)->get(),
+            'categories' => Category::with('childrenCat')->where('parent_id', 0)->get(),
             
             //Некий символ, определяющий вложенность. Для наглядности визуализации
             'delimiter' => ''

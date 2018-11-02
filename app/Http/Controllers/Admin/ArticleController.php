@@ -34,9 +34,9 @@ class ArticleController extends Controller
             'article' => [],
             
             //categories - дерево коллекций категорий для присвоения их новости
-            //with('findChildrenCat') - коллекции категорий с вложенными категориями
+            //with('childrenCat') - коллекции категорий с вложенными категориями
             //where('parent_id', 0) - получаем категории, которые являются только родителями и никому не подчиняются
-            'categories' => Category::with('findChildrenCat')->where('parent_id', 0)->get(),
+            'categories' => Category::with('childrenCat')->where('parent_id', 0)->get(),
             
             //Некий символ, определяющий вложенность категорий. Для наглядности визуализации
             'delimiter' => ''
@@ -87,7 +87,7 @@ class ArticleController extends Controller
         //Редактируемая новость
           'article'    => $article,
           //Список приаттаченных к редактируемой новости категорий
-          'categories' => Category::with('findChildrenCat')->where('parent_id', 0)->get(),
+          'categories' => Category::with('childrenCat')->where('parent_id', 0)->get(),
           //Символ вложенности
           'delimiter'  => ''
         ]);

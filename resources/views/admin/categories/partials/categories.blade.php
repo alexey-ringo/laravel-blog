@@ -20,12 +20,12 @@
     {!! $delimiter ?? "" !!}{{$category_list->title ?? ""}}
   </option>
 
-  @if(count($category_list->findChildrenCat) > 0)
+  @if(count($category_list->childrenCat) > 0)
     {{--Если у категории есть хоть одна вложенная категория - снова подключаем этот же самый шаблон--}}
     @include('admin.categories.partials.categories', [
       {{--Во вновь подключенный рекурсионным образом шаблон передаем только категории, 
       которые является вложенными для данной категории--}}
-      'categories' => $category_list->findChildrenCat,
+      'categories' => $category_list->childrenCat,
       {{--при каждой итерации добавляем в delimiter новый дефис для визуального отличия от вышестоящих--}}
       'delimiter'  => ' - ' . $delimiter
     ])

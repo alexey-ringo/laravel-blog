@@ -159,8 +159,12 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        
+        
         //Our CKEditor package
         Unisharp\Ckeditor\ServiceProvider::class,
+        //Our ServiceProvider
+        App\Providers\BlogServiceProvider::class,
 
     ],
 
