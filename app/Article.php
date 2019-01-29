@@ -21,9 +21,15 @@ class Article extends Model
     }
     
     //Polimorphic relations with categories - 
-    public function findCatForArticles() {
+    //Полисорфная связь модели Article с категориями
+    public function categoriesToArticles() {
         //'categoryable' - префикс для связных таблиц в названии полей таблицы categoryables
         //т.н. 'categoryable' - но без '_id'
         return $this->morphToMany('App\Category', 'categoryable');
+    }
+    
+    public function scopeLastArticles($query, $count)
+    {
+      return $query->orderBy('created_at', 'desc')->take($count)->get();
     }
 }

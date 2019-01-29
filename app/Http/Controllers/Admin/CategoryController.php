@@ -17,6 +17,7 @@ class CategoryController extends Controller
     public function index()
     {
         return view('admin.categories.index', [
+            //'categories' => Category::get()
             'categories' => Category::paginate(7)
             ]);
     }
@@ -71,7 +72,7 @@ class CategoryController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     * Открытие формы редактирования категорий
+     * Отображение формы редактирования категорий
      *
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
@@ -99,6 +100,7 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
+    //Название параметра $category в ресурсном контроллере ДОЛЖНО совпадать с именем в маршруте!!! 
     public function update(Request $request, Category $category)
     {
         //поле 'slug' исключаем из изменений

@@ -1,20 +1,7 @@
-        <div class="breadcrumbs">
-            <div class="col-sm-4">
-                <div class="page-header float-left">
-                    <div class="page-title">
-                        <h1>{{$title}}</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <div class="page-header float-right">
-                    <div class="page-title">
-                        <ol class="breadcrumb text-right">
-                            <li><a href="#">{{$parent}}</a></li>
-                            <li><a href="#">{{$title}}</a></li>
-                            <li class="active">{{$active}}</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
+<h2>{{$title}}</h2>
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+  		<li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{$parent}}</a></li>
+  		<li class="breadcrumb-item active">{{$active}}</li>
+	</ol>
+</nav>

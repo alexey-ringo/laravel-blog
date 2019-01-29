@@ -1,75 +1,47 @@
-<div class="card">
+<div class="shadow card">
     <div class="card-header">
-        <strong>Basic Form</strong> Elements
-    </div>
-    <div class="card-body card-block">
-                        
-        <div class="row form-group">
-            <div class="col col-md-3"><label for="select" class=" form-control-label">Статус</label></div>
-                <div class="col-12 col-md-9">
-                    <select name="published" id="published" data-placeholder="Выберите статус категории..." class="standardSelect" tabindex="1">
-                        {{--Форма универсальная для create и edit --}}
-                        {{--Если существует переданный id категории - значит это edit --}}
-                    @if(isset($category->id))
-                        <option value="0" @if($category->published == 0) selected="" @endif>
-                            Не опубликовано
-                        </option>
-                        <option value="1" @if($category->published == 1) selected="" @endif>
-                            Опубликовано
-                        </option>
-                    @else
-                        {{--Если не существует переданный id категории - значит это create --}}
-                        <option value="0" selected="">Не опубликовано</option>
-                        <option value="1" selected="">Опубликовано</option>
-                    @endif
-                    </select>
-                </div>
-        </div>
+
+		@component('admin.components.published', ['published' => $category->published ?? 0])
+		@endcomponent
         
-        <div class="row form-group">
-            <div class="col col-md-3">
-                <label for="title" class=" form-control-label">Наименование</label>
-            </div>
-            <div class="col-12 col-md-9">
-                <input type="text" id="title" name="title" placeholder="Заголовок категории" 
-                class="form-control" value="{{$category->title ?? ""}}" required>
-                    <small class="form-text text-muted">This is a help text</small>
-            </div>
-        </div>
-            
-        <div class="row form-group">
-            <div class="col col-md-3">
-                <label for="slug" class=" form-control-label">Slug</label>
-            </div>
-            <div class="col-12 col-md-9">
-                <input type="text" id="slug" name="slug" placeholder="Автоматическая генерация" 
-                    class="form-control" value="{{$category->slug ?? ""}}" readonly="">
-                <small class="form-text text-muted">This is a help text</small>
-            </div>
-        </div>
-        
-        <div class="row form-group">
-            <div class="col col-md-3">
-                <label for="parent_id" class=" form-control-label">Родительская категория</label>
-            </div>
-            <div class="col-12 col-md-9">
-                <select name="parent_id" id="parent_id" class="form-control">
-                    <option value="0">-- без родительской категории --</option>
-                    @include('admin.categories.partials.categories', ['categories' => $categories])
-                </select>
-            </div>
-        </div>
-                          
     </div>
-    
-    <div class="card-footer">
-        <button type="submit" class="btn btn-primary btn-sm">
-          <i class="fa fa-dot-circle-o"></i> Submit
-        </button>
-        <button type="reset" class="btn btn-danger btn-sm">
-          <i class="fa fa-ban"></i> Reset
-        </button>
-    </div>
+</div>		
+
+<div class="card mt-3">
+	<div class="card-header">
+		<ul class="nav nav-tabs card-header-tabs">
+		    <li class="nav-item">
+		        <a class="nav-link active" id="general-tab" data-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="true"><i class="fas fa-home"></i> Основные</a>
+		    </li>
+		</ul>
+	</div>
+	<div class="card-body">
+
+		<div class="tab-content" id="myTabContent">
+
+		    <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="general-tab">
+				
+				<div class="form-group">
+					<label for="">Наименование</label>
+					<input type="text" class="form-control" name="title" placeholder="Заголовок категории" value="{{ $category->title ?? '' }}" required>
+				</div>
+
+				<div class="form-group">
+				<label for="">Slug</label>
+				<input class="form-control" type="text" name="slug" placeholder="Автоматическая генерация" value="{{ $category->slug ?? '' }}" readonly="">
+				</div>
+
+				<div class="form-group">
+				<label for="">Родительская категория</label>
+				<select class="form-control" name="parent_id">
+				  	<option value="0">-- без родительской категории --</option>
+				  	@include('admin.categories.partials.categories')
+				</select>	
+				</div>
+
+		    </div>
+
+		</div>
+		
+	</div>
 </div>
-                    
-                  

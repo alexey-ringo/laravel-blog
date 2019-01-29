@@ -1,83 +1,69 @@
 @extends('admin.layouts.app_admin')
+
 @section('content')
 
-@component('admin.components.breadcrumbs')
+<div class="container">
+
+    @component('admin.components.breadcrumbs')
         @slot('title') Список категорий @endslot
         @slot('parent') Главная @endslot
         @slot('active') Категории @endslot
-@endcomponent
+    @endcomponent
 
-<div class="content mt-3">
-    <div class="animated fadeIn">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <strong class="card-title">Data Table</strong>
-                        <a href="{{route('admin.category.create')}}" class="btn btn-outline-primary" type="button">Создать категорию</a>
-                    </div>
-                    <div class="card-body">
-                        <table id="bootstrap-data-table" class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Наименование</th>
-                                    <th>Родительская</th>
-                                    <th>Публикация</th>
-                                    <th>Действие</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            @forelse($categories as $category)    
-                                <tr>
-                                    <td>{{$category->title}}</td>
-                                    <td>{{$category->parent_id}}</td>
-                                    <td>{{$category->published}}</td>
-                                    <td>
-                                        
-                                        <div class="table-data-feature text-right">
-                                
-                                            <form onsubmit="if(confirm('Удалить?')){return true}else{return false}" action="{{route('admin.category.destroy', $category)}}" method="post">
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                {{csrf_field()}}
-                                                
-                                                <a href="{{ Route('admin.category.edit', $category) }}" class="btn btn-outline-success">
-                                                Редактировать
-                                                </a>
-                            
-                              
-                                                <button type="submit" class="btn btn-outline-danger">
-                                                    Удалить
-                                                </button>
-                                            </form>
-                                        </div>
-                                        
-                                    </td>
-                                </tr>
+    <a href="{{ route('admin.category.create') }}" class="btn btn-primary mb-2"><i class="far fa-plus-square"></i> Создать</a>
+
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <th>Наименование</th>
+            <th class="text-center">Публикация</th>
+            <th class="text-right">Действие</th>
+        </thead>
+        <tbody>
+        @forelse ($categories as $category)
+            <tr>
+                <td>{{ $category->title }}</td>
+                <td class="text-center">
+                    <form id="published-form-{{ $category->id ?? '' }}" class="form-horizontal" action="{{route('admin.category.update', $category)}}" method="post">
+                        @method('PUT')
+                        @csrf
                         
-                            @empty
-                        
-                                <tr>
-                                    <td>
-                                        Данные отсутствуют
-                                    </td>
-                                </tr>
-                        
-                            @endforelse
-                            </tbody>
-                        </table>
-                  
-                    </div>
+                        @if($category->published)
+                            <i class="far fa-check-square fa-2x text-info" onclick="event.preventDefault();
+                                   document.getElementById('published-form-{{ $category->id }}').submit();"></i>
+                            <input type="hidden" name="published" value="0">
+                        @else
+                            <i class="fas fa-times fa-2x text-danger" onclick="event.preventDefault();
+                                   document.getElementById('published-form-{{ $category->id }}').submit();"></i>
+                            <input type="hidden" name="published" value="1">
+                        @endif
+                    </form>
+                </td>
+                <td class="text-right">
+                    <form onsubmit="if(confirm('Удалить?')){ return true }else{ return false }" action="{{ route('admin.category.destroy', $category) }}" method="post">
+                        @method('DELETE')
+                        @csrf
                     
-                    <div class="cart-footer">
-                        <ul class="pagination pull-right">
-                            {{$categories->links()}}
-                        </ul>
-                    </div>
-                    
-                </div>
-                
-            </div>
-        </div>
-    </div><!-- .animated -->
-</div><!-- .content -->
+                        <a class="btn btn-primary" href="{{ route('admin.category.edit', $category) }}"><i class="fa fa-edit"></i></a>
+
+                        <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                    </form>
+                </td>
+            </tr>
+        @empty
+            <tr>
+                <td colspan="3" class="text-center"><h2>Данные отсутствуют</h2></td>
+            </tr>
+        @endforelse
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3">
+                    {{ $categories->links() }}
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+
+</div>
+
 @endsection

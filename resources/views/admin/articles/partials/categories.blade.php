@@ -3,9 +3,9 @@
   <option value="{{$category->id ?? ""}}"
     {{--Этот блок только для редактирования новостей - условие существования id новости/поста--}}
     @isset($article->id)
-        {{--Если статья существует,т.е. - редактирвоание - перебор общего списка категорий--}}
-        @foreach($article->findCatForArticles as $category_article)
-            {{--Если категория из общего списка привязана к данной новости, то она должна быть выведена--}}
+        {{--Если статья существует,т.е. - редактирвоание - перебрать весь список категорий у данной статьи--}}
+        @foreach($article->categoriesToArticles as $category_article)
+            {{--Если категория из общего списка категорий уже привязана к данной новости (т.е. совпадает с приаттаченной категорией), то она должна быть выделена--}}
             @if($category->id == $category_article->id)
               selected="selected"
             @endif
@@ -13,7 +13,7 @@
     
     @endisset
     >
-    {!! $delimiter or "" !!}{{$category->title ?? ""}}
+    {!! $delimiter ?? "" !!}{{$category->title ?? ""}}
   </option>
 
   @if(count($category->childrenCat) > 0)

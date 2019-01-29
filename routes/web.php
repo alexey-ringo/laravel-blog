@@ -10,10 +10,16 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//{slug?} означает, что переменная может быть, а може и не быть
+Route::get('/blog/category/{slug?}', 'BlogController@category')->name('category');
+Route::get('/blog/article/{slug?}', 'BlogController@article')->name('article');
+
 
 //Группа роутов для админки
+//'prefix' => 'a7dm0in3' - URI-префикс для Админки
+//'namespace' => 'Admin' - namespace для контроллеров Админки (папка Admin)
 Route::group(['prefix' => 'a7dm0in3', 'namespace' => 'Admin', 'middleware' => ['auth'] ], function () {
-    Route::get('/', 'DashboardController@dashboard')->name('admin.index');
+    Route::get('/', 'DashboardController@dashboard')->name('admin.dashboard');
     //['as'=>'admin'] - префикс для полного имени в именнованном маршруте (напр - admin.category.create)
     //для исключения пересечения с др именнованными ресурсами
     Route::resource('/category', 'CategoryController', ['as'=>'admin']);

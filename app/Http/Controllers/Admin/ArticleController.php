@@ -58,7 +58,7 @@ class ArticleController extends Controller
         if($request->input('categories')) :
             //Присоединяем массив с выбранными для данной статьи категориями
             //Передаем в attach() массив категорий для присоединения
-            $article->findCatForArticles()->attach($request->input('categories'));
+            $article->categoriesToArticles()->attach($request->input('categories'));
         endif;
         
         return redirect()->route('admin.article.index');
@@ -104,9 +104,9 @@ class ArticleController extends Controller
     {
         $article->update($request->except('slug'));
         //Если список категорий пуст - отсоединяем
-        $article->findCatForArticles()->detach();
+        $article->categoriesToArticles()->detach();
         if($request->input('categories')) :
-          $article->findCatForArticles()->attach($request->input('categories'));
+          $article->categoriesToArticles()->attach($request->input('categories'));
         endif;
         
         return redirect()->route('admin.article.index');
@@ -121,7 +121,7 @@ class ArticleController extends Controller
     public function destroy(Article $article)
     {
         //Отсоединяем все связи с категориями
-        $article->findCatForArticles()->detach();
+        $article->categoriesToArticles()->detach();
         //Удаляем экземпляр новости
         $article->delete();
         
