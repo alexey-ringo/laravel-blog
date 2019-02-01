@@ -24,6 +24,9 @@ Route::group(['prefix' => 'a7dm0in3', 'namespace' => 'Admin', 'middleware' => ['
     //для исключения пересечения с др именнованными ресурсами
     Route::resource('/category', 'CategoryController', ['as'=>'admin']);
     Route::resource('/article', 'ArticleController', ['as'=>'admin']);
+    Route::group(['prefix' => 'user_management', 'namespace' => 'UserManagement'], function() {
+        Route::resource('/user', 'UserController', ['as' => 'admin.user_management']);
+    });
 });
 
 Route::get('/', function () {

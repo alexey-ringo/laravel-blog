@@ -44,7 +44,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-users"></i> Управление пользователями</a>
                             <div class="dropdown-menu">
-                                {{--<a class="dropdown-item" href="{{route('admin.user_managment.user.index')}}">Пользователи</a>--}}
+                                <a class="dropdown-item" href="{{route('admin.user_management.user.index')}}">Пользователи</a>
                             </div>
                         </li>
                     </ul>
