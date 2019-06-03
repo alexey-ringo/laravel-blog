@@ -22,6 +22,7 @@ Route::group(['prefix' => 'a7dm0in3', 'namespace' => 'Admin', 'middleware' => ['
     Route::get('/', 'DashboardController@dashboard')->name('admin.dashboard');
     //['as'=>'admin'] - префикс для полного имени в именнованном маршруте (напр - admin.category.create)
     //для исключения пересечения с др именнованными ресурсами
+    Route::post('/image-upload', 'ImageController@upload')->name('admin.upload_img');
     Route::resource('/category', 'CategoryController', ['as'=>'admin']);
     Route::resource('/article', 'ArticleController', ['as'=>'admin']);
     Route::group(['prefix' => 'user_management', 'namespace' => 'UserManagement'], function() {

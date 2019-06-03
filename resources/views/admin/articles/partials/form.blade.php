@@ -79,6 +79,17 @@
             
             <div class="row form-group">
                 <div class="col col-md-2">
+                    <label for="upload-image" class=" form-control-label">Загрузить картинку</label>
+                </div>
+                <div class="col-12 col-md-10">
+                    
+                    <image-upload></image-upload>
+                    
+                </div>
+            </div>
+            
+            <div class="row form-group">
+                <div class="col col-md-2">
                     <label for="meta_title" class=" form-control-label">Мета-заголовок</label>
                 </div>
                 <div class="col-12 col-md-10">
@@ -109,6 +120,7 @@
                         <small class="form-text text-muted">This is a help text</small>
                 </div>
             </div>
+            
                           
     </div>
     

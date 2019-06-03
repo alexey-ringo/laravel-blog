@@ -1,3 +1,4 @@
 *
 !public/
+!not_public/
 !.gitignore

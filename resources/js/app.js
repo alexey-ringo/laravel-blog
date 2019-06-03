@@ -22,6 +22,8 @@ window.Vue = require('vue');
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('upload-img-component', require('./components/UploadImgComponent.vue'));
+Vue.component('image-upload', require('./components/ImageUpload.vue'));
 
 const app = new Vue({
     el: '#app'
