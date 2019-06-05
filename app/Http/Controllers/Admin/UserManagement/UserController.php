@@ -6,6 +6,8 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Role;
+
 class UserController extends Controller
 {
     /**
@@ -17,7 +19,8 @@ class UserController extends Controller
     {
         //Возвращает всех пользователей
         return view('admin.user_management.user.index', [
-            'users' => User::paginate(10)
+            'users' => User::paginate(10),
+            'roles' => Role::all()
             ]);
     }
 
@@ -29,7 +32,8 @@ class UserController extends Controller
     public function create()
     {
         return view('admin.user_management.user.create', [
-            'user' => []
+            'user' => [],
+            'roles' => Role::all()
         ]);
     }
 
@@ -44,14 +48,19 @@ class UserController extends Controller
         $validator = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6|confirmed'
         ]);
         
-        User::create([
+        $user = User::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => bcrypt($request['password'])
         ]);
+        
+        //Проверка на наличие полученного от формы значения поля с name="roles"
+        if($request->input('roles')) :
+            $user->roles()->attach($request->input('roles'));
+        endif;
         
         return redirect()->route('admin.user_management.user.index');
     }
@@ -76,7 +85,8 @@ class UserController extends Controller
     public function edit(User $user)
     {
         return view('admin.user_management.user.edit', [
-            'user' => $user
+            'user' => $user,
+            'roles' => Role::all()
         ]);
     }
 
@@ -109,6 +119,14 @@ class UserController extends Controller
         //Если поле == null - в модель пароль не передавать, иначе - зашифровать перед передачей в модель
         $request['password'] == null ?: $user->password = bcrypt($request['password']);
         $user->save();
+        
+        //Если список ролей пуст - отсоединяем
+        $user->roles()->detach();
+        //Проверка на наличие полученного от формы значения поля с name="roles"
+        if($request->input('roles')) :
+            $user->roles()->attach($request->input('roles'));
+        endif;
+        
         return redirect()->route('admin.user_management.user.index');
     }
 
@@ -120,6 +138,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        $article->roles()->detach();
         $user->delete();
         return redirect()->route('admin.user_management.user.index');
     }

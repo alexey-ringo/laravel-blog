@@ -5,36 +5,30 @@
 <div class="container">
 
     @component('admin.components.breadcrumbs')
-        @slot('title') Список пользователей @endslot
+        @slot('title') Список разрешений операций @endslot
         @slot('parent') Главная @endslot
-        @slot('active') Пользователи @endslot
+        @slot('active') Разрешения операций @endslot
     @endcomponent
 
-    <a href="{{ route('admin.user_management.user.create') }}" class="btn btn-primary mb-2"><i class="far fa-plus-square"></i> Создать</a>
+    <a href="{{ route('admin.rbac_management.permission.create') }}" class="btn btn-primary mb-2"><i class="far fa-plus-square"></i> Создать</a>
 
     <table class="table table-striped table-borderless">
         <thead class="thead-dark">
             <th>Имя</th>
-            <th>Email</th>
-            <th>Роль</th>
+            <th>Описание</th>
             <th class="text-right">Действие</th>
         </thead>
         <tbody>
-        @forelse ($users as $user)
+        @forelse ($permissions as $permission)
             <tr>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->email }}</td>
-                <td>
-                    @foreach($user->roles as $role_title) 
-                        {{$role_title->name}} , 
-                    @endforeach
-                </td>
+                <td>{{ $permission->name }}</td>
+                <td></td>
                 <td class="text-right">
-                    <form onsubmit="if(confirm('Удалить?')){ return true }else{ return false }" action="{{ route('admin.user_management.user.destroy', $user) }}" method="post">
+                    <form onsubmit="if(confirm('Удалить?')){ return true }else{ return false }" action="{{ route('admin.rbac_management.permission.destroy', $permission) }}" method="post">
                         @method('DELETE')
                         @csrf
                     
-                        <a class="btn btn-primary" href="{{ route('admin.user_management.user.edit', $user) }}"><i class="fa fa-edit"></i></a>
+                        <a class="btn btn-primary" href="{{ route('admin.rbac_management.permission.edit', $permission) }}"><i class="fa fa-edit"></i></a>
 
                         <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                     </form>
@@ -49,7 +43,7 @@
         <tfoot>
             <tr>
                 <td colspan="3">
-                    {{ $users->links() }}
+                    {{ $permissions->links() }}
                 </td>
             </tr>
         </tfoot>

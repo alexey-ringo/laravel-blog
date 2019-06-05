@@ -47,6 +47,14 @@
                                 <a class="dropdown-item" href="{{route('admin.user_management.user.index')}}">Пользователи</a>
                             </div>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-users"></i> Управление RBAC</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="{{route('admin.rbac_management.role.index')}}">Роли</a>
+                                <a class="dropdown-item" href="{{route('admin.rbac_management.permission.index')}}">Разрешенные операции</a>
+                            </div>
+                        </li>
+                        
                     </ul>
 
                     <!-- Right Side Of Navbar -->

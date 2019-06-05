@@ -31,35 +31,9 @@
 				<div class="form-group">
 					<label for="">Имя</label>
 					{{--Если в возвращаемом из валибатора (после неправильной валидации), массиве есть поле name - выводим его, иначе берем значение из таблицы или пустое --}}
-					<input type="text" class="form-control" name="name" placeholder="Имя" value="@if(old('name')){{old('name')}}@else{{$user->name ?? ""}}@endif" required>
-				</div>
-
-				<div class="form-group">
-					<label for="">Email</label>
-					<input type="email" class="form-control" name="email" placeholder="Email" value="@if(old('email')){{old('email')}}@else{{$user->email ?? ""}}@endif" required>
+					<input type="text" class="form-control" name="name" placeholder="Имя" value="@if(old('name')){{old('name')}}@else{{$permission->name ?? ""}}@endif" required>
 				</div>
 				
-				<div class="row form-group">
-            		<div class="col col-md-3">
-                		<label for="roles" class=" form-control-label">Роли</label>
-            		</div>
-            		<div class="col-12 col-md-9">
-                		<select name="roles[]" id="roles" class="form-control" multiple="">
-                    		@include('admin.user_management.user.partials.roles', ['roles' => $roles])
-                    		
-                		</select>
-            		</div>
-        		</div>
-
-				<div class="form-group">
-					<label for="">Пароль</label>
-					<input type="password" class="form-control" name="password">
-				</div>
-
-				<div class="form-group">
-					<label for="">Подтверждение</label>
-					<input type="password" class="form-control" name="password_confirmation">	
-				</div>
 		    </div>
 
 		</div>

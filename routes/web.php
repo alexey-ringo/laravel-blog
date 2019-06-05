@@ -28,6 +28,10 @@ Route::group(['prefix' => 'a7dm0in3', 'namespace' => 'Admin', 'middleware' => ['
     Route::group(['prefix' => 'user_management', 'namespace' => 'UserManagement'], function() {
         Route::resource('/user', 'UserController', ['as' => 'admin.user_management']);
     });
+    Route::group(['prefix' => 'rbac_management', 'namespace' => 'RbacManagement'], function() {
+        Route::resource('/role', 'RoleController', ['as' => 'admin.rbac_management']);
+        Route::resource('/permission', 'PermissionController', ['as' => 'admin.rbac_management']);
+    });
 });
 
 Route::get('/', function () {
