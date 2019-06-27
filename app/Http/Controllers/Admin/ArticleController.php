@@ -4,11 +4,23 @@ namespace App\Http\Controllers\Admin;
 
 use App\Article;
 use App\Category;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use Gate;
+
 class ArticleController extends Controller
 {
+    //public function __construct() {
+        //parent::__construct();
+        
+    //    if(Gate::denies('VIEW_ARTICLE')) {
+    //        abort(403);
+    //    }
+        
+    //}
+    
     /**
      * Display a listing of the resource.
      *
@@ -30,6 +42,13 @@ class ArticleController extends Controller
      */
     public function create()
     {
+        //if(Gate::denies('add-article')) {
+        //    return redirect()->back()->with(['message' => 'У Вас недостаточно прав на реактирование этого материала']);
+        //}
+        if(Gate::denies('create', Article::class)) {
+            return redirect()->back()->with(['message' => 'У Вас недостаточно прав на реактирование этого материала']);
+        }
+        
         return view('admin.articles.create', [
             'article' => [],
             
@@ -52,7 +71,49 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         //Создаем модель Новости и заполняем всеми полями из POST
-        $article = Article::create($request->all());
+        //$article = Article::create($request->all());
+        $user = User::find($request->user()->id);
+        
+        //$validator = $request->validate([
+        //    'title' => 'required|string|max:255',
+        //    'slug' => 'required|string|max:255',
+        //]);
+        
+        /*
+        $article = new Article([
+            'slug' => $request['slug'],
+            'description' => $request['description'],
+            
+        ]);
+        $user->articles()->save($article);
+        */
+        
+        $article = $user->articles()->create([
+            'title' => $request['title'],
+            'slug' => $request['slug'],
+            'description_short' => $request['description_short'],
+            'description' => $request['description'],
+            //'image' => $request['description'],
+            //'image_show' => $request['description'],
+            'meta_title' => $request['meta_title'],
+            'meta_description' => $request['meta_description'],
+            'meta_keyword' => $request['meta_keyword'],
+            'published' => $request['published'],
+            'user_id' => $user->id,
+        ]);
+            /*    
+            $table->string('slug')->unique();
+            $table->text('description_short')->nullable();
+            $table->text('description');
+            $table->string('image')->nullable();
+            $table->boolean('image_show')->nullable();
+            $table->string('meta_title')->nullable();
+            $table->string('meta_description')->nullable();
+            $table->string('meta_keyword')->nullable();
+            $table->boolean('published');
+            $table->integer('viewed')->nullable();
+            $table->integer('user_id')->unsigned()->nullable();
+            */
         
         //Проверка на наличие полученного от формы значения поля с name="categories"
         if($request->input('categories')) :

@@ -26,6 +26,8 @@ class CreateArticlesTable extends Migration
             $table->string('meta_keyword')->nullable();
             $table->boolean('published');
             $table->integer('viewed')->nullable();
+            $table->integer('user_id')->unsigned()->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('created_by')->nullable();
             $table->integer('modified_by')->nullable();
             $table->timestamps();

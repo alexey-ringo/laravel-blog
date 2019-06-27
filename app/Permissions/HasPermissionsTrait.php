@@ -16,4 +16,6 @@ trait HasPermissionsTrait {
 //      return $this->belongsToMany(Permission::class,'users_permissions');
 //
 //   }
+
+
 }

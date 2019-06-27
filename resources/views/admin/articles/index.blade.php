@@ -9,6 +9,24 @@
         @slot('parent') Главная @endslot
         @slot('active') Новости @endslot
     @endcomponent
+    
+    <div>
+        @if (session()->has('message'))
+            <div class="alert alert-success">
+                {{ session()->get('message') }}
+            </div>
+        @endif
+
+        @if(count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+    </div>
 
     <a href="{{ route('admin.article.create') }}" class="btn btn-primary mb-2"><i class="far fa-plus-square"></i> Создать</a>
 

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 use Illuminate\Support\Str;
 
@@ -26,6 +27,10 @@ class Article extends Model
         //'categoryable' - префикс для связных таблиц в названии полей таблицы categoryables
         //т.н. 'categoryable' - но без '_id'
         return $this->morphToMany('App\Category', 'categoryable');
+    }
+    
+    public function users() {
+      return $this->belongsTo(User::class, 'id');
     }
     
     public function scopeLastArticles($query, $count)
